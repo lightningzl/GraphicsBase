@@ -1,7 +1,5 @@
 #pragma once
-
-#ifndef _VECTOR3_H_
-#include <cmath>
+#include <math.h>
 
 class Vector3
 {
@@ -139,5 +137,3 @@ inline float Distance(const Vector3& a, const Vector3& b)
 }
 
 extern const Vector3 kZeroVector;
-
-#endif // !_VECTOR3_H_
