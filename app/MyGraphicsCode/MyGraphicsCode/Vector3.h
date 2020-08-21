@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef _VECTOR3_H_
-//#include <cmath>
+#include <cmath>
 
 class Vector3
 {
@@ -113,7 +113,7 @@ public:
 
 inline float VectorMag(const Vector3 &a)
 {
-	return sqrt(a.x * a.x, a.y * a.y, a.z * a.z);
+	return sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
 }
 
 inline Vector3 CrossProduct(const Vector3& a, const Vector3& b)
