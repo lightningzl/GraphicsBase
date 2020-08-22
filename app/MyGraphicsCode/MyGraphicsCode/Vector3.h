@@ -111,7 +111,7 @@ public:
 
 inline float VectorMag(const Vector3 &a)
 {
-	return sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+	return sqrtf(a.x * a.x + a.y * a.y + a.z * a.z);
 }
 
 inline Vector3 CrossProduct(const Vector3& a, const Vector3& b)
@@ -133,7 +133,7 @@ inline float Distance(const Vector3& a, const Vector3& b)
 	float dx = a.x - b.x;
 	float dy = a.y - b.y;
 	float dz = a.z - b.z;
-	return sqrt(dx * dx + dy * dy + dz * dz);
+	return sqrtf(dx * dx + dy * dy + dz * dz);
 }
 
 extern const Vector3 kZeroVector;

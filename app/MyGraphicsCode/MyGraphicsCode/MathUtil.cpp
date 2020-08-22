@@ -3,7 +3,7 @@
 float wrapPi(float theta)
 {
 	theta += kPi;
-	theta -= floor(theta * klOver2Pi) * k2Pi;
+	theta -= floorf(theta * klOver2Pi) * k2Pi;
 	theta -= kPi;
 	return theta;
 }
