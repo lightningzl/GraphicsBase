@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Vector3.h"
-#include "EulerAngles.h"
+class Vector3;
+class EulerAngles;
 
 class Quaternion
 {
@@ -31,6 +31,6 @@ public:
 extern const Quaternion kQuaternionIdentity;
 
 extern float dotProduct(const Quaternion& a, const Quaternion& b);
-extern Quaternion slerp(const Quaternion& p, const Quaternion& q, float t);
+extern Quaternion slerp(const Quaternion& q0, const Quaternion& q1, float t);
 extern Quaternion conjugate(const Quaternion& q);
 extern Quaternion pow(const Quaternion& q, float exponent);

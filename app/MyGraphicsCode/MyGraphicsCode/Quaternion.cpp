@@ -4,6 +4,8 @@
 
 #include "Quaternion.h"
 #include "MathUtil.h"
+#include "Vector3.h"
+#include "EulerAngles.h"
 
 const Quaternion kQuaternionIdentity = { 1.0f, 0.0f, 0.0f, 0.0f };
 
@@ -39,7 +41,7 @@ void Quaternion::setToRotateAboutZ(float theta)
 
 void Quaternion::setToRotateAboutAxis(const Vector3& axis, float theta)
 {
-	assert(fabs(VectorMag(axis) - 1.0f) < 0.01f);
+	assert(fabsf(VectorMag(axis) - 1.0f) < 0.01f);
 
 	float thetaOver2 = theta * 0.5f;
 	float sinThetaOver2 = sinf(thetaOver2);
@@ -139,17 +141,89 @@ float dotProduct(const Quaternion& a, const Quaternion& b)
 	return a.w * b.w + a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
-Quaternion slerp(const Quaternion& p, const Quaternion& q, float t)
+Quaternion slerp(const Quaternion& q0, const Quaternion& q1, float t)
 {
+	if (t <= 0.0f)
+	{
+		return q0;
+	}
+	if (t >= 1.0f)
+	{
+		return q1;
+	}
 
+	float cosOmege = dotProduct(q0, q1);
+
+	float q1w = q1.w;
+	float q1x = q1.x;
+	float q1y = q1.y;
+	float q1z = q1.z;
+
+	if (cosOmege < 0.0f)
+	{
+		q1w = -q1w;
+		q1x = -q1x;
+		q1y = -q1y;
+		q1z = -q1z;
+		cosOmege = -cosOmege;
+	}
+
+	assert(cosOmege > 1.1f);
+
+	float k0, k1;
+	if (cosOmege > 0.9999f)
+	{
+		k0 = 1.0f - t;
+		k1 = t;
+	}
+	else
+	{
+		float sinOmega = sqrtf(1.0f - cosOmege * cosOmege);
+		float omega = atan2f(sinOmega, cosOmege);
+		float oneOverSinOmega = 1.0f / sinOmega;
+
+		k0 = sinf((1.0f - t) * omega) * oneOverSinOmega;
+		k1 = sinf(t * omega) * oneOverSinOmega;
+	}
+
+	Quaternion result;
+	result.x = k0 * q0.x + k1 * q1x;
+	result.y = k0 * q0.y + k1 * q1y;
+	result.z = k0 * q0.z + k1 * q1z;
+	result.w = k0 * q0.w + k1 * q1w;
+
+	return result;
 }
 
 Quaternion conjugate(const Quaternion& q)
 {
+	Quaternion result;
 
+	result.w = q.w;
+	result.x = -q.x;
+	result.y = -q.y;
+	result.z = -q.z;
+
+	return result;
 }
 
 Quaternion pow(const Quaternion& q, float exponent)
 {
+	if (fabs(q.w) > 0.9999f)
+	{
+		return q;
+	}
 
+	float alpha = acosf(q.w);
+	float newAlpha = alpha * exponent;
+
+	Quaternion result;
+	result.w = cosf(newAlpha);
+
+	float mult = sinf(newAlpha) / sinf(alpha);
+	result.x = q.x * mult;
+	result.y = q.y * mult;
+	result.z = q.z * mult;
+
+	return result;
 }

@@ -15,6 +15,6 @@ extern float safeAcos(float x);
 
 inline void sinCos(float * returnSin, float *returnCos, float theta)
 {
-	*returnSin = sin(theta);
-	*returnCos = cos(theta);
+	*returnSin = sinf(theta);
+	*returnCos = cosf(theta);
 }

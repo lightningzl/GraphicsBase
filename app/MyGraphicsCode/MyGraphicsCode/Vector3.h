@@ -4,7 +4,9 @@
 class Vector3
 {
 public:
-	float x, y, z;
+	float x = 0.0f;
+	float y = 0.0f;
+	float z = 0.0f;
 	Vector3() {}
 	Vector3(const Vector3& a) : x(a.x), y(a.y), z(a.z) {}
 	Vector3(float nx, float ny, float nz) : x(nx), y(ny), z(nz) {}
@@ -96,7 +98,7 @@ public:
 		float MagSq = x * x + y * y + z * z;
 		if (MagSq > 0.0f)
 		{
-			float OneOverMag = 1.0f / sqrt(MagSq);
+			float OneOverMag = 1.0f / sqrtf(MagSq);
 			x *= OneOverMag;
 			y *= OneOverMag;
 			z *= OneOverMag;
@@ -136,4 +138,4 @@ inline float Distance(const Vector3& a, const Vector3& b)
 	return sqrtf(dx * dx + dy * dy + dz * dz);
 }
 
-extern const Vector3 kZeroVector;
+//extern const Vector3 kZeroVector;

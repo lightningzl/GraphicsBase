@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Quaternion.h"
-#include "Matrix4x3.h"
-#include "RotationMatrix.h"
+class Quaternion;
+class Matrix4x3;
+class RotationMatrix;
 
 class EulerAngles
 {
 public:
-	float heading;
-	float pitch;
-	float bank;
+	float heading = 0.0f;
+	float pitch = 0.0f;
+	float bank = 0.0f;
 
 	EulerAngles() {}
 

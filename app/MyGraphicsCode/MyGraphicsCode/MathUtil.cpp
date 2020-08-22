@@ -20,5 +20,5 @@ float safeAcos(float x)
 		return 0.0f;
 	}
 
-	return acos(x);
+	return acosf(x);
 }

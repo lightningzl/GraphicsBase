@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EulerAngles.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="MathUtil.cpp" />
     <ClCompile Include="Matrix4x3.cpp" />
     <ClCompile Include="Quaternion.cpp" />
